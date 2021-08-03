@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--이상하게나는 여기 정적리소스 경로가 스프링에서 설정이 안되있던거같다 이상하다....
+        그래서 application.properties에서 정적경로 추가를 해놓았다...
+        지금꺼를 잘 확인하자 application.properties에서 /static~~으로 해놧고.
+        그래서 나는 지금 여기서 static을 포함해서 요청을 진행했더니 성공했다 참...
+    -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Soccer Video</title>
+    <!-- Favicon-->
+    <link th:href="@{/static/bootstrap/assets/favicon.ico}" rel="icon" type="image/x-icon" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link th:href="@{/static/bootstrap/css/styles.css}" rel="stylesheet" />
+    <style>
+        .video{ width: 75%;}
+    </style>
+</head>
+<body>
+<!-- Responsive navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">Soccer Video</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent"></div>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="">Home</a></li>
+                <!--href속성을 저렇게 비워놓으면 현재페이지가 새로고침된다.-->
+            </ul>
+    </div>
+</nav>
+<!--
+
+
+
+
+-->
+<!-- Page content-->
+<div class="container">
+    <div class="text-start mt-5">
+        <h6 style="color:gray;">Information from "Scorebat Football"</h6>
+        <h6 style="color:gray;">모든 동영상들은 "Scorebat Football"에서 가져온정보입니다.</h6><br>
+        <h6 style="color:gray;">The speed may be a little slow as we bring a lot of videos at once.</h6>
+        <h6 style="color:gray;">많은 영상들을 한번에 가져오다 보니 속도가 조금 느릴수 있습니다.</h6>
+
+
+        <h6 style="color:gray;">Check out the latest soccer videos from major clubs quickly!</h6>
+        <h6 style="color:gray;">주요 클럽들의 최신 축구영상들을 빠르게 확인해보세요!</h6><br>
+
+        <h6 style="color:gray;">In watching the video, sometimes national problems can occur.</h6>
+        <h6 style="color:gray;">We apologize for the inconvenience.</h6>
+        <h6 style="color:gray;">영상 시청하시는데 있어서, 국가문제가 발생할수 있습니다.</h6>
+        <h6 style="color:gray;">양해 부탁드립니다.</h6><br>
+
+    <div th:each="result : ${results}">
+        <h1 th:text="${result.title}"></h1>
+        <h3 th:text="${result.competition.name}"></h3>
+        <h3 th:text="|${result.date} (Based on UTC time)|"></h3>
+        <h3 th:text="${result.side1.name}"></h3>
+        <div class="video" th:utext="${result.embed}"></div>
+
+    </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JS-->
+<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js}"></script>
+<!-- Core theme JS-->
+<script th:src="@{/static/bootstrap/js/scripts.js}"></script>
+</body>
+</html>
